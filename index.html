@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Sudoku</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 30px auto;
+      background-color: white;
+    }
+    td {
+      border: 1px solid #000;
+      width: 55px;
+      height: 40px;
+      text-align: center;
+    }
+    input {
+      width: 38px;
+      height: 38px;
+      text-align: center;
+      font-size: 30px;
+      color: blue;
+      caret-color: transparent;
+      border: none;
+    }
+    td:nth-child(3n) {
+      border-right: 2px solid gray;
+    }
+    tr:nth-child(3n) td {
+      border-bottom: 2px solid gray;
+    }
+    tr:first-child td {
+      border-top: 2px solid lightgray;
+    }
+    td:first-child {
+      border-left: 2px solid lightgray;
+    }
+    .st:hover ,#hintButton:hover{
+      background-color:aqua;
+    }
+    .blur {
+      filter: blur(30px);
+    }
+    .conflict {
+      background-color: red;
+      color: white;
+    }
+    .max-mistakes,
+    .mistakes {
+      font-size: 20px;
+      color: blueviolet;
+    }
+    select {
+      padding: 10px;
+    }
+    body {
+      background-color: antiquewhite;
+    }
+    
+    #timer,#pauseResumeBtn,#resumeBtn{
+        display: none;
+    }
+    #pauseResumeBtn:hover,#resumeBtn:hover{
+        border:3px solid black;
+    }
+
+    #hintButton{
+      margin-left: 20px;
+      padding:10px;
+      border: 2px solid black;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #number-pad{
+      display: flex;
+      justify-content: center;
+      gap:10px;
+      align-items: center;
+      display: none;
+      margin-bottom: 30px;
+    }
+    #number-pad .num-btn{
+      padding:10px 20px;
+      width:30px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .num-btn:hover,.rulesBtn:hover{
+      background-color: aqua;
+    }
+    .num{
+      display: flex;
+      justify-content: center;
+    }
+    .rulesBtn{
+      padding:10px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .time{
+      display: flex;
+      gap:10px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    #resumeBtn:disabled{
+      border: 0px;
+    }
+  </style>
+</head>
+<body>
+<h2 style="text-align:center;font-size: 40px;margin-bottom:10px;">Sudoku.com</h2>
+<div id="mainContent">
+  <strong class="st" style="cursor: pointer; margin-right: 20px; border:2px solid black; padding:10px;border-radius: 5px;">New Game</strong>
+  
+  <label for="difficulty" style="font-size: 20px;" class="difflel"></label>
+
+  <select id="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+    <option value="expert">Expert</option>
+  </select>
+  <button id="hintButton">Get Hint</button>
+  <table>
+    <tbody class="tbody">
+      <button class="rulesBtn">View Rules</button>
+      <label style="margin-left:90%; font-size: 20px; color:blueviolet;">
+        Mistakes : <label class="mistakes">0</label>/<span class="max-mistakes">10</span>
+      </label>
+      <label style="margin-left:90%; font-size: 20px; color:blueviolet;margin-top:20px;">
+        Hints : <label class="hints">0</label>/<span class="max-mistakes">7</span>
+      </label>
+    </tbody>
+  </table>
+</div>
+<div id="number-pad">
+  <button class="num-btn"><span value = "1" class="num">1</span></button>
+  <button class="num-btn"><span class="num">2</span></button>
+  <button class="num-btn"><span class="num">3</span></button>
+  <button class="num-btn"><span class="num">4</span></button>
+  <button class="num-btn"><span class="num">5</span></button>
+  <button class="num-btn"><span class="num">6</span></button>
+  <button class="num-btn"><span class="num">7</span></button>
+  <button class="num-btn"><span class="num">8</span></button>
+  <button class="num-btn"><span class="num">9</span></button>
+  <button class="num-btn"><span class="num">Clr</span></button>
+</div>
+
+<div class="time">
+  <div id="timer" style="font-size: 20px; font-weight: bold;">Time: 00:00</div>
+  <button id="pauseResumeBtn" style="font-size: 16px; padding: 5px 10px; cursor: pointer;border-radius: 5px;">Pause</button>
+  <button id="resumeBtn" style="font-size: 16px; padding: 5px 10px; cursor: pointer;;border-radius: 5px;" disabled>Resume</button>
+</div>
+
+<script src="scrippt.js"></script>
+  
+
+</body>
+</html>
